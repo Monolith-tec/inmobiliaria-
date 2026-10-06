@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALTIER | Propiedades Exclusivas & Patrimonio</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cormorant Garamond (Editorial Serif) & Plus Jakarta Sans (Clean Modern Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0b0c10',
+                        'obsidian-card': '#14161d',
+                        'obsidian-light': '#1e222c',
+                        champagne: '#d4af37',
+                        'champagne-light': '#f3e5ab',
+                        'champagne-muted': '#967d28',
+                        ivory: '#f8f8f6',
+                        'slate-border': '#262b36'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Key Mouse Cursor (Desktop) */
+        @media (min-width: 1024px) {
+            body, button, a, input, select, textarea, label {
+                cursor: none !important;
+            }
+        }
+
+        #key-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 42px;
+            height: 42px;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-10px, -10px) rotate(-15deg);
+            transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease;
+            will-change: transform, left, top;
+            filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.75));
+        }
+
+        #key-cursor.hovering {
+            transform: translate(-10px, -10px) scale(1.3) rotate(20deg);
+        }
+
+        #key-cursor.clicking {
+            transform: translate(-10px, -10px) scale(0.85) rotate(-35deg);
+        }
+
+        /* Scroll Reveal Effect Classes */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delays for Staggered Animation */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+
+        /* Glassmorphism Styling */
+        .glass-panel {
+            background: rgba(20, 22, 29, 0.82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(212, 175, 55, 0.18);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0c10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262b36;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-ivory font-sans antialiased selection:bg-champagne selection:text-black overflow-x-hidden">
+
+    <!-- Custom Mouse Cursor SVG (Key / Llave Dorada de Lujo) -->
+    <div id="key-cursor" class="hidden lg:block">
+        <svg width="42" height="42" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Key Head Ring -->
+            <circle cx="20" cy="20" r="12" stroke="url(#key_gold_grad)" stroke-width="4" fill="none"/>
+            <circle cx="20" cy="20" r="6" fill="#d4af37"/>
+            <!-- Key Shaft -->
+            <path d="M28 28L52 52" stroke="url(#key_gold_grad)" stroke-width="5" stroke-linecap="round"/>
+            <!-- Key Teeth / Bits -->
+            <path d="M44 44L50 38" stroke="#d4af37" stroke-width="4" stroke-linecap="round"/>
+            <path d="M48 48L54 42" stroke="#d4af37" stroke-width="4" stroke-linecap="round"/>
+            <!-- Sparkle Highlight -->
+            <circle cx="20" cy="14" r="1.5" fill="#ffffff"/>
+            <defs>
+                <linearGradient id="key_gold_grad" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#f3e5ab"/>
+                    <stop offset="0.5" stop-color="#d4af37"/>
+                    <stop offset="1" stop-color="#967d28"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 glass-panel border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 border border-champagne flex items-center justify-center rotate-45 group-hover:rotate-180 transition-transform duration-700">
+                    <div class="w-2.5 h-2.5 bg-champagne"></div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-2xl tracking-[0.25em] font-medium text-white group-hover:text-champagne transition-colors">VALTIER</span>
+                    <span class="text-[8px] tracking-[0.35em] text-champagne uppercase font-light">Propiedades & Patrimonio</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-xs uppercase tracking-[0.2em] font-medium text-gray-300">
+                <a href="#filosofia" class="hover:text-champagne transition-colors py-2">Filosofía</a>
+                <a href="#portafolio" class="hover:text-champagne transition-colors py-2">Propiedades</a>
+                <a href="#simulador" class="hover:text-champagne transition-colors py-2">Simulador</a>
+                <a href="#concierge" class="hover:text-champagne transition-colors py-2">Valoración</a>
+            </nav>
+
+            <!-- Action Button -->
+            <div class="hidden sm:block">
+                <a href="#contacto" class="px-5 py-2.5 text-xs uppercase tracking-widest border border-champagne/60 hover:border-champagne bg-champagne/10 hover:bg-champagne hover:text-black transition-all duration-300 text-champagne font-semibold rounded-sm">
+                    Agendar Cita
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION (PRIMERA INTERFAZ - ESTRICTAMENTE ALINEADA A LA IZQUIERDA) -->
+    <section class="relative min-h-screen flex items-center justify-start overflow-hidden bg-obsidian text-white pt-24 pb-12 px-6 lg:px-16">
+        <!-- Architectural Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2400&q=80" alt="Arquitectura de Lujo Valtier" class="w-full h-full object-cover object-center filter brightness-[0.45] contrast-110">
+            <!-- Gradient Overlay for Left Text Readability -->
+            <div class="absolute inset-0 bg-gradient-to-r from-obsidian via-obsidian/85 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-black/40"></div>
+        </div>
+
+        <!-- LEFT ALIGNED CONTENT CONTAINER -->
+        <div class="relative z-10 max-w-2xl text-left flex flex-col items-start space-y-7 my-auto">
+            
+            <!-- Category Badge -->
+            <div class="reveal-element inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-champagne/10 border border-champagne/40 text-champagne text-xs uppercase tracking-[0.25em] font-semibold">
+                <span class="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse"></span>
+                <span>Colección Arquitectónica 2026</span>
+            </div>
+
+            <!-- Main Formal Title (Strictly Left Aligned) -->
+            <h1 class="reveal-element delay-100 font-serif text-4xl sm:text-5xl lg:text-6xl font-light text-white leading-[1.15] tracking-tight text-left">
+                VALTIER | Propiedades Exclusivas & Patrimonio
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="reveal-element delay-200 text-gray-300 text-base sm:text-lg font-light leading-relaxed max-w-xl text-left">
+                Gestión confidencial y adquisición estratégica de residencias de autor, penthouses panorámicos y activos inmobiliarios de alta plusvalía.
+            </p>
+
+            <!-- Metrics Bar (Strictly Left Aligned) -->
+            <div class="reveal-element delay-300 grid grid-cols-3 gap-6 pt-6 border-t border-white/15 w-full max-w-lg text-left">
+                <div class="flex flex-col items-start">
+                    <span class="font-serif text-2xl sm:text-3xl text-champagne font-bold">$450M+</span>
+                    <span class="text-[10px] sm:text-xs uppercase tracking-widest text-gray-400 font-medium">Gestionados</span>
+                </div>
+                <div class="flex flex-col items-start">
+                    <span class="font-serif text-2xl sm:text-3xl text-champagne font-bold">15+</span>
+                    <span class="text-[10px] sm:text-xs uppercase tracking-widest text-gray-400 font-medium">Años Excelencia</span>
+                </div>
+                <div class="flex flex-col items-start">
+                    <span class="font-serif text-2xl sm:text-3xl text-champagne font-bold">99.4%</span>
+                    <span class="text-[10px] sm:text-xs uppercase tracking-widest text-gray-400 font-medium">Precisión Legal</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons (Strictly Left Aligned) -->
+            <div class="reveal-element delay-400 flex flex-wrap items-center justify-start gap-4 pt-4">
+                <a href="#portafolio" class="px-8 py-4 bg-champagne hover:bg-champagne-light text-obsidian font-semibold text-xs uppercase tracking-[0.2em] transition-all duration-300 shadow-xl shadow-champagne/10 rounded-sm">
+                    Explorar Catálogo Privado
+                </a>
+                <a href="#simulador" class="px-8 py-4 border border-white/30 hover:border-champagne text-white hover:text-champagne font-medium text-xs uppercase tracking-[0.2em] backdrop-blur-sm transition-all duration-300 rounded-sm">
+                    Simulador Financiero
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHILOSOPHY / EDITORIAL STATEMENT SECTION -->
+    <section id="filosofia" class="py-28 px-6 lg:px-12 bg-obsidian border-b border-slate-border relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Editorial Column -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="reveal-element text-xs uppercase tracking-[0.3em] text-champagne font-semibold block">Nuestro Manifiesto</span>
+                    <h2 class="reveal-element delay-100 font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-white leading-tight">
+                        La Excelencia no es un Detalle, es la Estructura Misma.
+                    </h2>
+                    <p class="reveal-element delay-200 text-gray-400 text-sm leading-relaxed font-light">
+                        En VALTIER concebimos los bienes raíces no como meras transacciones de metros cuadrados, sino como la consolidación de un legado familiar y financiero. Cada propiedad en nuestro portafolio atraviesa un riguroso proceso de auditoría legal, arquitectónica y urbana.
+                    </p>
+                </div>
+
+                <!-- Right Feature Cards Grid -->
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="reveal-element delay-100 p-8 glass-panel rounded-sm hover:border-champagne/50 transition-colors">
+                        <div class="w-10 h-10 mb-6 border border-champagne/40 flex items-center justify-center text-champagne font-serif text-xl">01</div>
+                        <h3 class="font-serif text-xl text-white mb-2">Discreción Absoluta</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed font-light">
+                            Protocolos de confidencialidad de nivel institucional para compradores y vendedores de alto perfil.
+                        </p>
+                    </div>
+
+                    <div class="reveal-element delay-200 p-8 glass-panel rounded-sm hover:border-champagne/50 transition-colors">
+                        <div class="w-10 h-10 mb-6 border border-champagne/40 flex items-center justify-center text-champagne font-serif text-xl">02</div>
+                        <h3 class="font-serif text-xl text-white mb-2">Arquitectura de Autor</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed font-light">
+                            Exclusividad garantizada en obras firmadas por firmas arquitectónicas reconocidas internacionalmente.
+                        </p>
+                    </div>
+
+                    <div class="reveal-element delay-300 p-8 glass-panel rounded-sm hover:border-champagne/50 transition-colors">
+                        <div class="w-10 h-10 mb-6 border border-champagne/40 flex items-center justify-center text-champagne font-serif text-xl">03</div>
+                        <h3 class="font-serif text-xl text-white mb-2">Análisis de Capital</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed font-light">
+                            Modelado proyectado de rendimiento de renta y plusvalía a 5, 10 y 20 años antes de cada adquisición.
+                        </p>
+                    </div>
+
+                    <div class="reveal-element delay-400 p-8 glass-panel rounded-sm hover:border-champagne/50 transition-colors">
+                        <div class="w-10 h-10 mb-6 border border-champagne/40 flex items-center justify-center text-champagne font-serif text-xl">04</div>
+                        <h3 class="font-serif text-xl text-white mb-2">Servicio Concierge</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed font-light">
+                            Acompañamiento legal, notarial y de diseño de interiores posterior a la entrega de la propiedad.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROPERTY PORTFOLIO SECTION -->
+    <section id="portafolio" class="py-28 px-6 lg:px-12 bg-obsidian-card relative">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-slate-border pb-8">
+                <div class="space-y-3">
+                    <span class="reveal-element text-xs uppercase tracking-[0.3em] text-champagne font-semibold block">Catálogo Exclusivo</span>
+                    <h2 class="reveal-element delay-100 font-serif text-3xl sm:text-4xl text-white font-light">Residencias Disponibles</h2>
+                </div>
+                
+                <!-- Filter Controls -->
+                <div class="reveal-element delay-200 mt-6 md:mt-0 flex flex-wrap gap-2">
+                    <button onclick="filterProperties('all')" class="filter-btn active px-4 py-2 text-xs uppercase tracking-wider border border-champagne bg-champagne text-obsidian font-semibold rounded-sm transition-all">Todas</button>
+                    <button onclick="filterProperties('penthouse')" class="filter-btn px-4 py-2 text-xs uppercase tracking-wider border border-slate-border text-gray-300 hover:border-champagne rounded-sm transition-all">Penthouses</button>
+                    <button onclick="filterProperties('residencia')" class="filter-btn px-4 py-2 text-xs uppercase tracking-wider border border-slate-border text-gray-300 hover:border-champagne rounded-sm transition-all">Residencias</button>
+                    <button onclick="filterProperties('villa')" class="filter-btn px-4 py-2 text-xs uppercase tracking-wider border border-slate-border text-gray-300 hover:border-champagne rounded-sm transition-all">Villas</button>
+                </div>
+            </div>
+
+            <!-- Property Cards Grid -->
+            <div id="property-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamically populated via JavaScript -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MORTGAGE & FINANCIAL CALCULATOR SECTION -->
+    <section id="simulador" class="py-28 px-6 lg:px-12 bg-obsidian relative border-y border-slate-border">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Info Column -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="reveal-element text-xs uppercase tracking-[0.3em] text-champagne font-semibold block">Estructuración Financiera</span>
+                    <h2 class="reveal-element delay-100 font-serif text-3xl sm:text-4xl text-white font-light leading-tight">
+                        Simulador de Inversión Hipotecaria Privada
+                    </h2>
+                    <p class="reveal-element delay-200 text-gray-400 text-sm leading-relaxed font-light">
+                        Calcule la proyección financiera de adquisición. Configure los términos de enganche, plazo de amortización y conozca el pago mensual estimado en tiempo real.
+                    </p>
+
+                    <div class="reveal-element delay-300 p-6 glass-panel rounded-sm space-y-4">
+                        <div class="flex items-center justify-between text-xs border-b border-slate-border pb-3">
+                            <span class="text-gray-400">Tasa de Interés Referencial:</span>
+                            <span class="text-champagne font-semibold font-serif text-sm">8.50% Anual</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs border-b border-slate-border pb-3">
+                            <span class="text-gray-400">Comisión por Apertura:</span>
+                            <span class="text-white font-medium">0% (Clientes Valtier)</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-gray-400">Gastos Notariales Est.:</span>
+                            <span class="text-white font-medium">5% al 7% del valor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Calculator Card -->
+                <div class="reveal-element delay-200 lg:col-span-7 glass-panel p-8 sm:p-10 rounded-sm">
+                    <div class="space-y-6">
+                        
+                        <!-- Slider 1: Property Value -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-xs uppercase tracking-wider text-gray-300 font-medium">Valor de la Propiedad</label>
+                                <span id="calc-price-display" class="font-serif text-xl text-champagne font-bold">$2,500,000 USD</span>
+                            </div>
+                            <input type="range" id="calc-price" min="500000" max="10000000" step="100000" value="2500000" class="w-full accent-champagne bg-obsidian border-none h-2 rounded-lg cursor-pointer">
+                            <div class="flex justify-between text-[10px] text-gray-500 mt-1">
+                                <span>$500K USD</span>
+                                <span>$10M USD</span>
+                            </div>
+                        </div>
+
+                        <!-- Slider 2: Down Payment -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-xs uppercase tracking-wider text-gray-300 font-medium">Enganche Inicial (%)</label>
+                                <span id="calc-down-display" class="font-serif text-xl text-champagne font-bold">30% ($750,000 USD)</span>
+                            </div>
+                            <input type="range" id="calc-down" min="10" max="60" step="5" value="30" class="w-full accent-champagne bg-obsidian border-none h-2 rounded-lg cursor-pointer">
+                            <div class="flex justify-between text-[10px] text-gray-500 mt-1">
+                                <span>10%</span>
+                                <span>60%</span>
+                            </div>
+                        </div>
+
+                        <!-- Slider 3: Term Years -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-xs uppercase tracking-wider text-gray-300 font-medium">Plazo de Financiamiento</label>
+                                <span id="calc-years-display" class="font-serif text-xl text-champagne font-bold">15 Años</span>
+                            </div>
+                            <input type="range" id="calc-years" min="5" max="30" step="5" value="15" class="w-full accent-champagne bg-obsidian border-none h-2 rounded-lg cursor-pointer">
+                            <div class="flex justify-between text-[10px] text-gray-500 mt-1">
+                                <span>5 Años</span>
+                                <span>30 Años</span>
+                            </div>
+                        </div>
+
+                        <!-- Live Results Panel -->
+                        <div class="p-6 bg-obsidian border border-champagne/30 rounded-sm mt-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+                            <div>
+                                <span class="text-[10px] uppercase tracking-[0.2em] text-gray-400 block mb-1">Pago Mensual Estimado</span>
+                                <div id="calc-monthly-result" class="font-serif text-3xl sm:text-4xl text-champagne font-bold">$17,238 USD</div>
+                                <span class="text-[10px] text-gray-500">Capital + Intereses ordinarios</span>
+                            </div>
+                            <a href="#contacto" class="w-full sm:w-auto text-center px-6 py-3.5 bg-champagne hover:bg-champagne-light text-obsidian font-semibold text-xs uppercase tracking-widest transition-all">
+                                Solicitar Pre-Aprobación
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONCIERGE & PROPERTY VALUATION SECTION -->
+    <section id="concierge" class="py-28 px-6 lg:px-12 bg-obsidian-card relative">
+        <div class="max-w-5xl mx-auto glass-panel p-8 sm:p-14 rounded-sm border border-champagne/20">
+            <div class="text-center max-w-2xl mx-auto mb-10 space-y-3">
+                <span class="reveal-element text-xs uppercase tracking-[0.3em] text-champagne font-semibold block">Para Propietarios</span>
+                <h2 class="reveal-element delay-100 font-serif text-3xl sm:text-4xl text-white font-light">Solicitar Valoración de Inmueble</h2>
+                <p class="reveal-element delay-200 text-xs sm:text-sm text-gray-400 leading-relaxed font-light">
+                    Si desea comercializar una propiedad premium de forma confidencial, ingrese los detalles preliminares para agendar un peritaje con nuestros especialistas.
+                </p>
+            </div>
+
+            <form id="valuation-form" onsubmit="handleValuationSubmit(event)" class="reveal-element delay-300 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-gray-300 mb-2 font-medium">Nombre Completo</label>
+                    <input type="text" required placeholder="Ej. Alejandro de la Vega" class="w-full bg-obsidian border border-slate-border focus:border-champagne text-white text-sm px-4 py-3 outline-none transition-all rounded-sm">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-gray-300 mb-2 font-medium">Teléfono Directo / WhatsApp</label>
+                    <input type="tel" required placeholder="+52 (55) 0000 0000" class="w-full bg-obsidian border border-slate-border focus:border-champagne text-white text-sm px-4 py-3 outline-none transition-all rounded-sm">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-gray-300 mb-2 font-medium">Ubicación / Zona de la Propiedad</label>
+                    <input type="text" required placeholder="Ej. Polanco / Lomas de Chapultepec" class="w-full bg-obsidian border border-slate-border focus:border-champagne text-white text-sm px-4 py-3 outline-none transition-all rounded-sm">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-gray-300 mb-2 font-medium">Tipo de Inmueble</label>
+                    <select class="w-full bg-obsidian border border-slate-border focus:border-champagne text-white text-sm px-4 py-3 outline-none transition-all rounded-sm">
+                        <option>Penthouse / Ático</option>
+                        <option>Residencia Unifamiliar</option>
+                        <option>Villa / Finca</option>
+                        <option>Terreno para Desarrollar</option>
+                    </select>
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-xs uppercase tracking-wider text-gray-300 mb-2 font-medium">Notas Adicionales (Superficie aproximada, características)</label>
+                    <textarea rows="3" placeholder="Detalles de la propiedad..." class="w-full bg-obsidian border border-slate-border focus:border-champagne text-white text-sm px-4 py-3 outline-none transition-all rounded-sm"></textarea>
+                </div>
+                <div class="md:col-span-2 text-center pt-2">
+                    <button type="submit" class="px-10 py-4 bg-champagne hover:bg-champagne-light text-obsidian font-semibold text-xs uppercase tracking-[0.2em] transition-all rounded-sm">
+                        Enviar Expediente a Concierge
+                    </button>
+                </div>
+            </form>
+
+            <div id="valuation-success" class="hidden text-center py-8 space-y-3">
+                <div class="w-12 h-12 border border-champagne text-champagne mx-auto flex items-center justify-center font-serif text-2xl">✓</div>
+                <h3 class="font-serif text-2xl text-white">Solicitud Recibida con Éxito</h3>
+                <p class="text-xs text-gray-400 max-w-md mx-auto">Un socio director de VALTIER se comunicará con usted en un lapso no mayor a 4 horas hábiles.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="py-28 px-6 lg:px-12 bg-obsidian relative border-t border-slate-border">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center space-y-3 mb-16">
+                <span class="reveal-element text-xs uppercase tracking-[0.3em] text-champagne font-semibold block">Testimonios Seleccionados</span>
+                <h2 class="reveal-element delay-100 font-serif text-3xl sm:text-4xl text-white font-light">Casos de Éxito & Confianza</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="reveal-element delay-100 glass-panel p-8 rounded-sm space-y-4">
+                    <p class="text-xs text-gray-300 italic font-light leading-relaxed">
+                        "La agilidad y el nivel de privacidad que ofreció el equipo de VALTIER para la compra de nuestro Penthouse en Polanco superó cualquier expectativa previa."
+                    </p>
+                    <div class="pt-4 border-t border-slate-border">
+                        <p class="font-serif text-sm text-white">Dr. Fernando R. S.</p>
+                        <p class="text-[10px] text-champagne uppercase tracking-wider">Inversionista Privado</p>
+                    </div>
+                </div>
+
+                <div class="reveal-element delay-200 glass-panel p-8 rounded-sm space-y-4">
+                    <p class="text-xs text-gray-300 italic font-light leading-relaxed">
+                        "Estructuraron un portafolio diversificado con terrenos estratégicos que han generado una plusvalía superior al 22% anual. Profesionales excepcionales."
+                    </p>
+                    <div class="pt-4 border-t border-slate-border">
+                        <p class="font-serif text-sm text-white">Valeria Mendoza</p>
+                        <p class="text-[10px] text-champagne uppercase tracking-wider">Family Office Director</p>
+                    </div>
+                </div>
+
+                <div class="reveal-element delay-300 glass-panel p-8 rounded-sm space-y-4">
+                    <p class="text-xs text-gray-300 italic font-light leading-relaxed">
+                        "La asesoría notarial y el rigor arquitectónico en la inspección de la villa fueron impecables. Recomiendo sin reservas su servicio concierge."
+                    </p>
+                    <div class="pt-4 border-t border-slate-border">
+                        <p class="font-serif text-sm text-white">Roberto L. B.</p>
+                        <p class="text-[10px] text-champagne uppercase tracking-wider">Adquirente de Residencia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER & CONTACT SECTION -->
+    <footer id="contacto" class="bg-black text-white pt-20 pb-12 px-6 lg:px-12 border-t border-slate-border">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-white/10">
+            
+            <!-- Brand Info -->
+            <div class="md:col-span-5 space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-6 h-6 border border-champagne flex items-center justify-center rotate-45">
+                        <div class="w-2 h-2 bg-champagne"></div>
+                    </div>
+                    <span class="font-serif text-2xl tracking-[0.2em] font-medium text-white">VALTIER</span>
+                </div>
+                <p class="text-xs text-gray-400 font-light max-w-sm leading-relaxed">
+                    Firma Inmobiliaria & Despacho de Consultoría Patrimonial. Especialistas en propiedades de autor y desarrollos de alta jerarquía.
+                </p>
+            </div>
+
+            <!-- Contact Details -->
+            <div class="md:col-span-3 space-y-3">
+                <h4 class="text-xs uppercase tracking-[0.2em] text-champagne font-semibold mb-4">Oficinas Centrales</h4>
+                <p class="text-xs text-gray-300 font-light">Av. Campos Elíseos #400, Polanco</p>
+                <p class="text-xs text-gray-300 font-light">Ciudad de México, CP 11560</p>
+                <p class="text-xs text-gray-300 font-light">contacto@valtier-realestate.com</p>
+                <p class="text-xs text-gray-300 font-light">+52 (55) 8900 4500</p>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="md:col-span-4 space-y-3">
+                <h4 class="text-xs uppercase tracking-[0.2em] text-champagne font-semibold mb-4">Suscripción Privada</h4>
+                <p class="text-xs text-gray-400 font-light">Reciba acceso anticipado a propiedades fuera de mercado (Off-Market Opportunities).</p>
+                <div class="flex gap-2">
+                    <input type="email" placeholder="correo@ejemplo.com" class="bg-obsidian border border-slate-border text-xs px-3 py-2.5 w-full text-white outline-none focus:border-champagne">
+                    <button class="px-4 py-2.5 bg-champagne text-obsidian text-xs font-semibold uppercase tracking-wider hover:bg-champagne-light">Unirse</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-500 font-light gap-4">
+            <p>© 2026 VALTIER Real Estate & Architecture. Todos los derechos reservados.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-champagne transition-colors">Aviso de Privacidad</a>
+                <a href="#" class="hover:text-champagne transition-colors">Términos de Servicio</a>
+                <a href="#" class="hover:text-champagne transition-colors">Código de Ética</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PROPERTY DETAIL MODAL -->
+    <div id="property-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="bg-obsidian-card border border-champagne/30 rounded-sm max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl font-serif">&times;</button>
+            <div id="modal-content" class="space-y-6">
+                <!-- Injected dynamically via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ----------------------------------------------------
+           1. PROPERTY DATA DEFINITIONS
+        ---------------------------------------------------- */
+        const properties = [
+            {
+                id: 1,
+                title: "Penthouse Sky Residence",
+                category: "penthouse",
+                location: "Polanco V Secc, CDMX",
+                price: "$3,850,000 USD",
+                area: "540 m²",
+                beds: 4,
+                baths: 4.5,
+                parking: 4,
+                image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+                description: "Exclusivo penthouse de triple altura con terraza privada panorámica de 120 m², acabados en mármol de Carrara, automatización Lutron y elevador privado directo al recibidor."
+            },
+            {
+                id: 2,
+                title: "Villa Lumina Architectural",
+                category: "villa",
+                location: "San Ángel, CDMX",
+                price: "$5,200,000 USD",
+                area: "890 m²",
+                beds: 5,
+                baths: 6,
+                parking: 6,
+                image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+                description: "Obra maestra de la arquitectura contemporánea rodeada de jardines maduros. Cuenta con piscina climatizada con nado contra corriente, cava subterránea de vinos y pabellón de huéspedes."
+            },
+            {
+                id: 3,
+                title: "Ático SOHO Design",
+                category: "penthouse",
+                location: "Condesa, CDMX",
+                price: "$2,150,000 USD",
+                area: "310 m²",
+                beds: 3,
+                baths: 3,
+                parking: 3,
+                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+                description: "Espacio de concepto abierto con ventanales de piso a techo y vistas al parque. Cocina gourmet con equipos Gaggenau y terraza con fogatero de gas exterior."
+            },
+            {
+                id: 4,
+                title: "Residencia Los Álamos",
+                category: "residencia",
+                location: "Lomas de Chapultepec, CDMX",
+                price: "$4,600,000 USD",
+                area: "750 m²",
+                beds: 4,
+                baths: 5,
+                parking: 5,
+                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+                description: "Residencia unifamiliar con máxima seguridad blindada. Diseño bioclimático, celdas solares residenciales, gimnasio privado y departamento de servicio independiente."
+            },
+            {
+                id: 5,
+                title: "Villa Solaria Modernist",
+                category: "villa",
+                location: "Pedregal de San Ángel, CDMX",
+                price: "$6,100,000 USD",
+                area: "1,100 m²",
+                beds: 6,
+                baths: 7,
+                parking: 8,
+                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+                description: "Estructurado sobre piedra volcánica natural con grandes claros sin columnas. Incluye cine en casa profesional, SPA con sauna y sistema de seguridad perimetral de grado militar."
+            },
+            {
+                id: 6,
+                title: "Residencia Horizon Bay",
+                category: "residencia",
+                location: "Santa Fe, CDMX",
+                price: "$2,950,000 USD",
+                area: "480 m²",
+                beds: 3,
+                baths: 3.5,
+                parking: 4,
+                image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+                description: "Elegante residencia minimalista con vistas despejadas al bosque. Acabados en nogal americano, piso radiante hidrónico y acceso directo a club de golf."
+            }
+        ];
+
+        /* ----------------------------------------------------
+           2. RENDER PROPERTY CARDS
+        ---------------------------------------------------- */
+        function renderProperties(items) {
+            const grid = document.getElementById('property-grid');
+            grid.innerHTML = items.map(p => `
+                <div class="glass-panel group rounded-sm overflow-hidden border border-slate-border hover:border-champagne/60 transition-all duration-500 flex flex-col justify-between">
+                    <div>
+                        <!-- Image Container -->
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 left-4 bg-obsidian/80 backdrop-blur-md border border-champagne/40 px-3 py-1 text-[10px] uppercase tracking-widest text-champagne font-semibold">
+                                ${p.category}
+                            </div>
+                            <div class="absolute bottom-4 right-4 bg-obsidian/90 px-3 py-1 text-xs font-serif text-white font-bold">
+                                ${p.price}
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-6 space-y-3 text-left">
+                            <p class="text-[10px] uppercase tracking-widest text-champagne font-medium">${p.location}</p>
+                            <h3 class="font-serif text-xl text-white group-hover:text-champagne transition-colors">${p.title}</h3>
+                            <p class="text-xs text-gray-400 font-light line-clamp-2">${p.description}</p>
+                        </div>
+                    </div>
+
+                    <!-- Card Specs & Action -->
+                    <div class="p-6 pt-0 border-t border-slate-border/50 mt-4 space-y-4">
+                        <div class="grid grid-cols-3 gap-2 text-[11px] text-gray-300 font-light pt-3 text-left">
+                            <div><span class="text-champagne font-semibold">${p.area}</span> Sup.</div>
+                            <div><span class="text-champagne font-semibold">${p.beds}</span> Recs.</div>
+                            <div><span class="text-champagne font-semibold">${p.baths}</span> Baños</div>
+                        </div>
+                        <button onclick="openModal(${p.id})" class="w-full py-3 bg-obsidian-light hover:bg-champagne hover:text-obsidian text-xs uppercase tracking-wider text-white font-medium border border-slate-border transition-all">
+                            Ver Ficha Técnica
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProperties(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-champagne', 'text-obsidian', 'border-champagne');
+                btn.classList.add('border-slate-border', 'text-gray-300');
+            });
+            event.target.classList.add('bg-champagne', 'text-obsidian', 'border-champagne');
+
+            if (category === 'all') {
+                renderProperties(properties);
+            } else {
+                const filtered = properties.filter(p => p.category === category);
+                renderProperties(filtered);
+            }
+        }
+
+        /* ----------------------------------------------------
+           3. PROPERTY MODAL CONTROLS
+        ---------------------------------------------------- */
+        function openModal(id) {
+            const p = properties.find(item => item.id === id);
+            if (!p) return;
+
+            const modalContent = document.getElementById('modal-content');
+            modalContent.innerHTML = `
+                <div class="space-y-4 text-left">
+                    <img src="${p.image}" alt="${p.title}" class="w-full h-72 object-cover rounded-sm border border-champagne/30">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-champagne font-semibold">${p.location}</span>
+                            <h2 class="font-serif text-3xl text-white">${p.title}</h2>
+                        </div>
+                        <span class="font-serif text-2xl text-champagne font-bold">${p.price}</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">${p.description}</p>
+                    
+                    <div class="grid grid-cols-4 gap-4 p-4 bg-obsidian rounded-sm border border-slate-border text-center">
+                        <div>
+                            <span class="text-[10px] text-gray-400 block uppercase">Superficie</span>
+                            <span class="font-serif text-lg text-white font-semibold">${p.area}</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-gray-400 block uppercase">Recámaras</span>
+                            <span class="font-serif text-lg text-white font-semibold">${p.beds}</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-gray-400 block uppercase">Baños</span>
+                            <span class="font-serif text-lg text-white font-semibold">${p.baths}</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-gray-400 block uppercase">Estacionamiento</span>
+                            <span class="font-serif text-lg text-white font-semibold">${p.parking}</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-border">
+                        <h4 class="text-xs uppercase tracking-wider text-champagne font-semibold mb-3">Solicitar Recorrido Privado</h4>
+                        <form onsubmit="handleModalBooking(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <input type="text" required placeholder="Su Nombre" class="bg-obsidian border border-slate-border text-xs text-white p-3 outline-none focus:border-champagne">
+                            <input type="tel" required placeholder="Teléfono de Contacto" class="bg-obsidian border border-slate-border text-xs text-white p-3 outline-none focus:border-champagne">
+                            <button type="submit" class="sm:col-span-2 py-3 bg-champagne text-obsidian text-xs font-semibold uppercase tracking-widest hover:bg-champagne-light">Agendar Visita Confidencial</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+            document.getElementById('property-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('property-modal').classList.add('hidden');
+        }
+
+        function handleModalBooking(e) {
+            e.preventDefault();
+            alert("Su solicitud de recorrido privado ha sido procesada. Un agente sénior de VALTIER lo contactará a la brevedad.");
+            closeModal();
+        }
+
+        /* ----------------------------------------------------
+           4. MORTGAGE CALCULATOR LOGIC
+        ---------------------------------------------------- */
+        const priceInput = document.getElementById('calc-price');
+        const downInput = document.getElementById('calc-down');
+        const yearsInput = document.getElementById('calc-years');
+
+        function updateCalculator() {
+            const price = parseFloat(priceInput.value);
+            const downPercent = parseFloat(downInput.value);
+            const years = parseInt(yearsInput.value);
+
+            const downAmount = price * (downPercent / 100);
+            const loanAmount = price - downAmount;
+            const annualInterestRate = 0.085; // 8.5%
+            const monthlyInterestRate = annualInterestRate / 12;
+            const totalPayments = years * 12;
+
+            // Monthly Payment Formula
+            const monthlyPayment = (loanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalPayments)) / (Math.pow(1 + monthlyInterestRate, totalPayments) - 1);
+
+            // Update UI Labels
+            document.getElementById('calc-price-display').innerText = '$' + price.toLocaleString('en-US') + ' USD';
+            document.getElementById('calc-down-display').innerText = downPercent + '% ($' + downAmount.toLocaleString('en-US') + ' USD)';
+            document.getElementById('calc-years-display').innerText = years + ' Años';
+            document.getElementById('calc-monthly-result').innerText = '$' + Math.round(monthlyPayment).toLocaleString('en-US') + ' USD';
+        }
+
+        priceInput.addEventListener('input', updateCalculator);
+        downInput.addEventListener('input', updateCalculator);
+        yearsInput.addEventListener('input', updateCalculator);
+
+        /* ----------------------------------------------------
+           5. CONCIERGE VALUATION FORM HANDLER
+        ---------------------------------------------------- */
+        function handleValuationSubmit(e) {
+            e.preventDefault();
+            document.getElementById('valuation-form').classList.add('hidden');
+            document.getElementById('valuation-success').classList.remove('hidden');
+        }
+
+        /* ----------------------------------------------------
+           6. GOLDEN KEY MOUSE CURSOR TRACKING LOGIC
+        ---------------------------------------------------- */
+        const keyCursor = document.getElementById('key-cursor');
+        
+        if (window.innerWidth >= 1024) {
+            window.addEventListener('mousemove', (e) => {
+                keyCursor.style.left = `${e.clientX}px`;
+                keyCursor.style.top = `${e.clientY}px`;
+            });
+
+            const hoverTargets = 'a, button, input, select, textarea, .filter-btn';
+            document.addEventListener('mouseover', (e) => {
+                if (e.target.closest(hoverTargets)) {
+                    keyCursor.classList.add('hovering');
+                }
+            });
+
+            document.addEventListener('mouseout', (e) => {
+                if (e.target.closest(hoverTargets)) {
+                    keyCursor.classList.remove('hovering');
+                }
+            });
+
+            document.addEventListener('mousedown', () => keyCursor.classList.add('clicking'));
+            document.addEventListener('mouseup', () => keyCursor.classList.remove('clicking'));
+        }
+
+        /* ----------------------------------------------------
+           7. SCROLL REVEAL ANIMATIONS (INTERSECTION OBSERVER)
+        ---------------------------------------------------- */
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.reveal-element');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            revealElements.forEach(el => observer.observe(el));
+        }
+
+        // Initialize on Load
+        window.onload = function() {
+            renderProperties(properties);
+            updateCalculator();
+            initScrollReveal();
+        };
+    </script>
+</body>
+</html>
